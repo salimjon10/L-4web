@@ -86,7 +86,7 @@ export default function Task(props: Props) {
 
   function switchPinned() {
     if (lastPinnedIndex >= 3 && !pinned) {
-      alert("Maximum pinned tasks!");
+      alert("Достигнут лимит закрепленных задач!");
     } else {
       dispatch(togglePinned(props.index));
       setPinned(!pinned);
@@ -96,7 +96,7 @@ export default function Task(props: Props) {
 
   return (
     <div ref={ref}>
-      <div className="task">
+      <div className="task" style={pinned ? { borderColor: "red" } : {}}>
         <div
           className="text-container"
           onClick={() => setButtonsVisible(!buttonsVisible)}
@@ -113,7 +113,9 @@ export default function Task(props: Props) {
           X
         </button>
       </div>
-      {buttonsVisible && <TaskButtons setAlert={props.setAlert} index={props.index} />}
+      {buttonsVisible && (
+        <TaskButtons setAlert={props.setAlert} index={props.index} />
+      )}
     </div>
   );
 }
